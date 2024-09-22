@@ -10,11 +10,12 @@ import (
 )
 
 func main() {
-	solveDayOne("../inputs/day1-1.txt")
-	solvePart2("../inputs/day1-1.txt")
+	SolvePart1("../inputs/day1-1.txt")
+	SolvePart2("../inputs/day1-1.txt")
+	Part2Replace("../inputs/day1-1.txt")
 }
 
-func solveDayOne(filename string) {
+func SolvePart1(filename string) {
 	var digits []rune
 	sum := 0
 	lines := utils.Parse(filename)
@@ -36,7 +37,7 @@ func solveDayOne(filename string) {
 
 }
 
-func solvePart2(filename string) {
+func SolvePart2(filename string) {
 	digitMap := map[string]rune{
 		"one":   '1',
 		"two":   '2',
@@ -94,4 +95,41 @@ func solvePart2(filename string) {
 		values = values[:0]
 	}
 	fmt.Println("Part 2 sum: ", sum)
+}
+
+// silly hacky way I saw on reddit but is actually about 33% faster and 40% more memory efficient
+func Part2Replace(filename string) {
+
+	var digits []rune
+	sum := 0
+	lines := utils.Parse(filename)
+	for i, line := range lines {
+		replaced := line
+		replaced = strings.ReplaceAll(replaced, "one", "one1one")
+		replaced = strings.ReplaceAll(replaced, "two", "two2two")
+		replaced = strings.ReplaceAll(replaced, "three", "three3three")
+		replaced = strings.ReplaceAll(replaced, "four", "four4four")
+		replaced = strings.ReplaceAll(replaced, "five", "five5five")
+		replaced = strings.ReplaceAll(replaced, "six", "six6six")
+		replaced = strings.ReplaceAll(replaced, "seven", "seven7seven")
+		replaced = strings.ReplaceAll(replaced, "eight", "eight8eight")
+		replaced = strings.ReplaceAll(replaced, "nine", "nine9nine")
+		replaced = strings.ReplaceAll(replaced, "zero", "zero0zero")
+		lines[i] = replaced
+	}
+	for _, line := range lines {
+		for _, char := range line {
+			if unicode.IsDigit(char) {
+				digits = append(digits, char)
+			}
+		}
+		num, err := strconv.Atoi(string(digits[0]) + string(digits[len(digits)-1]))
+		if err != nil {
+			panic(err)
+		}
+		sum += num
+		digits = digits[:0]
+	}
+
+	fmt.Println("Part 1 sum: ", sum)
 }
