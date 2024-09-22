@@ -1,3 +1,3 @@
-module github.com/pepperonirollz/aoc-2023
+module github.com/pepperonirollz/advent-of-code-2023
 
 go 1.20

@@ -6,7 +6,7 @@ import (
 	"strings"
 	"unicode"
 
-	"github.com/pepperonirollz/aoc-2023/pkg/utils"
+	"github.com/pepperonirollz/advent-of-code-2023/pkg/utils"
 )
 
 func main() {
