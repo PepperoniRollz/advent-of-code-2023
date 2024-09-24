@@ -53,7 +53,6 @@ func SolvePart2(filename string) {
 	sum := 0
 	lines := utils.Parse(filename)
 	for _, line := range lines {
-
 		indexMap := make(map[int]string)
 		var values []string
 		for word, _ := range digitMap {
@@ -91,10 +90,10 @@ func SolvePart2(filename string) {
 			panic(err)
 		}
 		sum += num
-
+		indexMap = nil
 		values = values[:0]
 	}
-	fmt.Println("Part 2 sum: ", sum)
+	// fmt.Println("Part 2 sum: ", sum)
 }
 
 // silly hacky way I saw on reddit but is actually about 33% faster and 40% more memory efficient
@@ -131,5 +130,5 @@ func Part2Replace(filename string) {
 		digits = digits[:0]
 	}
 
-	fmt.Println("Part 1 sum: ", sum)
+	// fmt.Println("Part 2 sum: ", sum)
 }
